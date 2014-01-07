@@ -159,7 +159,6 @@
                   (cadr (assoc 'groups (cdr x)))) photos)))
 
 ;; (summarise-sets exfoliated)
-
 (define (count-groups groups)
   (let ((ph (make-hash)))
     (map (lambda (x)
@@ -171,10 +170,14 @@
 
 ;; collate various and sundry analysis
 (define (analyse-365)
-  (let ((photoset (get-photoset set_02013)))
+  (let ((photoset (get-photoset set_02013))
+        (exfoliated (exfoliate-photoset set_02013))) 
     (displayln ";; titles and views")
     (print (titles-and-views photoset))
     (displayln ";; tag fequency")
     (print (tag-freq photoset))
     (displayln ";; groups and sets")
-    (print (count-groups (exfoliate-photoset set_02013)))))
+    (print exfoliated)
+    (displayln ";; groups")
+    (print (count-groups (summarise-sets exfoliated)))))
+
